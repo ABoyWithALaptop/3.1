@@ -26,8 +26,6 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/3.1:latest
-      - name: ReDeploy render
-        uses: JorgeLNJunior/render-deploy@v1.4.5
-        with:
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+      - name: Trigger Render deploy
+        run: |
+          curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_WEBHOOK_KEY }}
